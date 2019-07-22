@@ -7,6 +7,10 @@ var gulp = require('gulp'),
 gulp.task('typescript', function() {
     var tsResult = tsProject.src()
         .pipe(tsProject());
- 
     return tsResult.js.pipe(gulp.dest('bin/'));
+});
+
+
+gulp.task('watch', function() {
+    gulp.watch('src/**/*.ts', gulp.series('typescript'));
 });
