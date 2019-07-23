@@ -1,9 +1,14 @@
 module App {
 	export class Preloader extends Phaser.State {
-		background: Phaser.Sprite;
-
 		preload() {
-           
+			this.game.load.image('bg', 'assets/i/bg_html.jpg');
+			this.game.load.atlasJSONHash('desktopUi', 'assets/i/desktopUi.png', 'assets/json/desktopUi.json');
+			this.game.load.atlasJSONHash('main', 'assets/i/main.png', 'assets/json/main.json');
+			this.game.load.atlasJSONHash('symbols1', 'assets/i/symbols1.png', 'assets/json/symbols1.json');
+			this.game.load.atlasJSONHash('symbols2', 'assets/i/symbols2.png', 'assets/json/symbols2.json');
+			this.game.load.atlasJSONHash('symbols3', 'assets/i/symbols3.png', 'assets/json/symbols3.json');
+			this.game.load.atlasJSONHash('symbols4', 'assets/i/symbols4.png', 'assets/json/symbols4.json');
+			this.game.load.atlasJSONHash('symbols5', 'assets/i/symbols5.png', 'assets/json/symbols5.json');
 		}
 
 		create() {
