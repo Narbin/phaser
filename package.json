@@ -9,12 +9,12 @@
   "directories": {
     "lib": "lib"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-typescript": "^5.0.1",
     "typescript": "^3.5.3"
   },
-  "devDependencies": {},
   "scripts": {
     "build": "gulp typescript"
   },
