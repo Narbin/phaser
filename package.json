@@ -1,0 +1,31 @@
+{
+  "name": "phaser",
+  "version": "1.0.0",
+  "description": "Phaser game for eFun",
+  "main": "gulpfile.js",
+  "bin": {
+    "phaser": "game.js"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-typescript": "^5.0.1",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "gulp typescript"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Narbin/phaser.git"
+  },
+  "author": "Arkadiusz Fus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Narbin/phaser/issues"
+  },
+  "homepage": "https://github.com/Narbin/phaser#readme"
+}
