@@ -30,8 +30,14 @@ module App {
 
 				roller.group.align(1, -1, 250, 200);
 				roller.group.x = that.game.width * 0.5 + roller.group.width / 2 - (300 * index); 
-			});
+				roller.group.y = that.game.height / 2 - 300;
 
+			    var mask = that.game.add.graphics(roller.group.x, roller.group.y);
+			    mask.beginFill(0xffffff);
+			    mask.drawRect(0, 0, 300, 200 * 3);
+
+			    roller.group.mask = mask;
+			});
 			console.log(this.rollers)
 		}
 	}
