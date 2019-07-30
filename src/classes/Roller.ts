@@ -25,11 +25,31 @@ module App {
 			this.game = game;
 			
 			this.symbols.forEach(function(symbol: String) {
-				var _sprite = game.add.sprite(0, 0, 'symbols', symbol + "_000");
+				var _sprite = that.findAndCreateSprite('symbols', symbol + "_000");
 				that.sprites.push(_sprite);
 	    		_sprite.inputEnabled = true;
+	    		_sprite.scale.set(250 / _sprite.width);
 	    		that.group.add(_sprite);
 	    	});
+		}
+		findAndCreateSprite(key: string, keyframe: string) : Phaser.Sprite {
+			var that = this;
+			var keys = this.game.cache.getKeys(Phaser.Cache.IMAGE);
+			var frame = null;
+			var sprite:Phaser.Sprite = null;
+
+			keys.forEach(function (key: string) {
+				if (sprite === null && (/(symbols)/).test(key)) {
+					frame = that.game.cache.getFrameByName(key, keyframe);
+					if (frame !== null) {
+						sprite = that.game.add.sprite(0, 0, key, keyframe);
+					}
+				}
+			});
+			if (sprite === null) {
+				sprite = that.game.add.sprite(0, 0, key, keyframe);
+			}
+			return sprite;
 		}
 		startTween(howMany: number) {
 			var that = this;
