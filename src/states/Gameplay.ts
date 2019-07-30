@@ -14,21 +14,21 @@ module App {
 		}
 		_initRollers = function () {
 			var that = this;
+			var duration = 800;
 			this.rollers = [];
 
 			this.game.cache.getJSON('config').forEach(function (item: Array<String>) {
-				that.rollers.push(new Roller(item));
+				that.rollers.push(new Roller(item, that));
 			});
 			
 			this.rollers.forEach(function(roller: Roller, index: number) {
-				roller.group = that.add.group();
+				roller.duration = duration;
+				duration += 60;
+				roller.group.onChildInputDown.add(function (child: Phaser.Sprite, pointer: any) {
+					that.animRollers();
+				}, that);
 
-				roller.symbols.forEach(function(symbol: String) {
-					var _sprite = that.add.sprite(0, 0, 'symbols', symbol + "_000"); 
-					roller.group.add(_sprite);
-				});
-
-				roller.group.align(1, -1, 250, 200);
+				roller.group.align(1, -1, 250, 200, Phaser.TOP_CENTER);
 				roller.group.x = that.game.width * 0.5 + roller.group.width / 2 - (300 * index); 
 				roller.group.y = that.game.height / 2 - 300;
 
@@ -39,6 +39,14 @@ module App {
 			    roller.group.mask = mask;
 			});
 			console.log(this.rollers)
+		}
+		animRollers = function () {
+			var that = this;
+			var random = ~~(Math.random() * 3 + 3);
+			
+			this.rollers.forEach(function(roller: Roller) {
+				roller.startTween(random); ;
+			});
 		}
 	}
 } 
