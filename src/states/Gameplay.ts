@@ -1,6 +1,8 @@
 module App {
 	export class Gameplay extends Phaser.State {
 		background: Phaser.Sprite;
+		reelBg: Phaser.Sprite;
+		logo: Phaser.Sprite;
 		rollers: Array<Roller>;
 		rollersWidth: number;
 		rollersHeight: number;
@@ -11,9 +13,13 @@ module App {
 			this.rollersWidth = 350;
 			this.rollersHeight = 174;
 
-			var reelBg = this.game.add.sprite(0, 0, 'main', 'reelBg'); 
-		
+			this.reelBg = this.game.add.sprite(0, 0, 'main', 'reelBg'); 
+
 			this._initRollers();
+
+			this.logo = this.game.add.sprite(0, 0, 'main', 'logo'); 
+			this.logo.y = -12;
+			this.logo.x = this.game.width * 0.5 - this.logo.width * 0.5;
 		}
 		_initUI = function () {
 
