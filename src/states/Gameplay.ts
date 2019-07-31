@@ -20,9 +20,25 @@ module App {
 			this.logo = this.game.add.sprite(0, 0, 'main', 'logo'); 
 			this.logo.y = -12;
 			this.logo.x = this.game.width * 0.5 - this.logo.width * 0.5;
+
+			this._initUI();
 		}
 		_initUI = function () {
+			var button_start_background = this.game.add.sprite(0, 0, 'desktopUi', 'button_start_background'); 
+			button_start_background.y = this.game.height - button_start_background.height + 21;
+			button_start_background.x = this.game.width * 0.5 - button_start_background.width * 0.5;
 
+			var maxbet_disable = this.game.add.sprite(0, 0, 'desktopUi', 'maxbet_disable'); 
+			maxbet_disable.y = button_start_background.y + 30 * 0.5;
+			maxbet_disable.x = button_start_background.x + 15;
+
+			var auto_disable = this.game.add.sprite(0, 0, 'desktopUi', 'auto_disable'); 
+			auto_disable.y = button_start_background.y + 33 * 0.5;
+			auto_disable.x = button_start_background.x + button_start_background.width * 0.5;
+
+			var start_active = this.game.add.sprite(0, 0, 'desktopUi', 'start_active'); 
+			start_active.y = button_start_background.y + 26 * 0.5;
+			start_active.x = button_start_background.x + button_start_background.width * 0.5 - start_active.width * 0.5;
 		}
 		_initRollers = function () {
 			var that = this;
