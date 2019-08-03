@@ -27,6 +27,16 @@ module App {
 			this._initUI();
 		}
 		_initUI = function () {
+			var lowerBackgroundBMD:Phaser.BitmapData = this.game.add.bitmapData(this.game.width, 80); 
+			lowerBackgroundBMD.ctx.fillStyle = '#000';
+			lowerBackgroundBMD.ctx.fillRect(0,0, this.game.width, 80);
+			
+			var lowerBackground:Phaser.Sprite = this.game.add.sprite(0, 0, lowerBackgroundBMD); 
+			lowerBackground.alpha = 0.7;
+
+			lowerBackground.y = this.game.height - lowerBackground.height;
+			lowerBackground.x = 0;
+
 			var button_start_background = this.game.add.sprite(0, 0, 'desktopUi', 'button_start_background'); 
 			button_start_background.y = this.game.height - button_start_background.height + 21;
 			button_start_background.x = this.game.width * 0.5 - button_start_background.width * 0.5;
