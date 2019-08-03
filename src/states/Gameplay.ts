@@ -6,7 +6,10 @@ module App {
 		rollers: Array<Roller>;
 		rollersWidth: number;
 		rollersHeight: number;
+		startActiveBtn: Phaser.Button;
+		animationCompleted: boolean;
 		create() {
+			this.animationCompleted = true;
 			this.background = this.game.add.sprite(0, 0, 'main', 'bg'); 
 			this.background.width = this.game.width;
 			this.background.height = this.game.height;
@@ -32,13 +35,19 @@ module App {
 			maxbet_disable.y = button_start_background.y + 30 * 0.5;
 			maxbet_disable.x = button_start_background.x + 15;
 
-			var auto_disable = this.game.add.sprite(0, 0, 'desktopUi', 'auto_disable'); 
+			var auto_disable = this.game.add.sprite(0, 0,  'desktopUi', 'auto_disable'); 
 			auto_disable.y = button_start_background.y + 33 * 0.5;
 			auto_disable.x = button_start_background.x + button_start_background.width * 0.5;
 
-			var start_active = this.game.add.sprite(0, 0, 'desktopUi', 'start_active'); 
-			start_active.y = button_start_background.y + 26 * 0.5;
-			start_active.x = button_start_background.x + button_start_background.width * 0.5 - start_active.width * 0.5;
+			this.startActiveBtn = this.game.add.button(0, 0, 'desktopUi',  function () {
+				if(this.animationCompleted) {
+					this.animationCompleted = false;
+					this.animRollers();
+					this.tooglePlayBtn();
+				}
+			}, this, 'start_active', 'start_active', 'start_active'); 
+			this.startActiveBtn.y = button_start_background.y + 26 * 0.5;
+			this.startActiveBtn.x = button_start_background.x + button_start_background.width * 0.5 - this.startActiveBtn.width * 0.5;
 		}
 		_initRollers = function () {
 			var that = this;
@@ -52,9 +61,6 @@ module App {
 			this.rollers.forEach(function(roller: Roller, index: number) {
 				roller.duration = duration;
 				duration += 60;
-				roller.group.onChildInputDown.add(function (child: Phaser.Sprite, pointer: any) {
-					that.animRollers();
-				}, that);
 
 				roller.group.align(1, -1, that.rollersWidth + 70, that.rollersHeight, Phaser.TOP_CENTER);
 				roller.group.x = that.game.width * 0.5 + roller.group.width / 2 - ((that.rollersWidth + 15) * index) ; 
@@ -66,15 +72,21 @@ module App {
 
 			    roller.group.mask = mask;
 			});
-			console.log(this.rollers)
 		}
 		animRollers = function () {
-			var that = this;
 			var random = ~~(Math.random() * 3 + 3);
-			
+
 			this.rollers.forEach(function(roller: Roller) {
 				roller.startTween(random); ;
 			});
+		}
+		tooglePlayBtn = function() {
+			var that = this;
+			this.startActiveBtn.setFrames('stop_active', 'stop_active', 'stop_active');
+			window.setTimeout(function() {
+				that.startActiveBtn.setFrames('start_active', 'start_active', 'start_active');
+				that.animationCompleted = true;
+			}, 1000 + 3 * 60);
 		}
 	}
 } 
